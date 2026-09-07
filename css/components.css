@@ -1,0 +1,235 @@
+/* ============================================
+   CYBER WAR ROOM - Component-specific Styles
+   ============================================ */
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-bright);
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 1000;
+    letter-spacing: 0.5px;
+}
+
+.tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== LOGIN BANNER (Security notice) ===== */
+.sec-banner {
+    background: var(--accent-red-dim);
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 1px;
+    animation: alert-banner 2s ease-in-out infinite;
+}
+
+/* ===== SEVERITY COLOR CODING ===== */
+.severity-critical {
+    background: var(--accent-red-dim);
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+.severity-high {
+    background: var(--accent-orange-dim);
+    color: var(--accent-orange);
+    border-color: var(--accent-orange);
+}
+
+.severity-medium {
+    background: var(--accent-yellow-dim);
+    color: var(--accent-yellow);
+    border-color: var(--accent-yellow);
+}
+
+.severity-low {
+    background: var(--accent-blue-dim);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+/* ===== Toggle switch ===== */
+.switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.switch.active {
+    background: var(--accent-green-dim);
+    border-color: var(--accent-green);
+}
+
+.switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.switch.active::after {
+    transform: translateX(20px);
+    background: var(--accent-green);
+    box-shadow: var(--glow-green);
+}
+
+/* ===== PROGRESS RING (for gauges) ===== */
+.ring-progress {
+    position: relative;
+    display: inline-block;
+}
+
+.ring-progress .ring-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--accent-green);
+    text-shadow: var(--glow-green);
+}
+
+/* ===== PULSE INDICATOR (for live data) ===== */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--accent-green);
+    letter-spacing: 1px;
+}
+
+.live-indicator .live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: dot-pulse 1.5s ease-in-out infinite;
+    box-shadow: var(--glow-green);
+}
+
+/* ===== SEVERITY BADGE (corner of incident cards) ===== */
+.incident-badge {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ===== CHART CONTAINER ===== */
+.chart-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-label {
+    position: absolute;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+/* ===== EXPANDABLE PANEL ===== */
+.panel.collapsed .panel-body {
+    display: none;
+}
+
+.panel .collapse-toggle {
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 8px;
+    user-select: none;
+}
+
+.panel .collapse-toggle:hover {
+    color: var(--accent-blue);
+    text-shadow: var(--glow-blue);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: var(--spacing-sm) 0;
+}
+
+.h-divider {
+    width: 1px;
+    background: var(--border);
+    margin: 0 var(--spacing-sm);
+}
+
+/* ===== STATUS ICON ===== */
+.status-icon {
+    font-size: 14px;
+    animation: none;
+}
+
+.status-icon.ok {
+    color: var(--accent-green);
+    text-shadow: var(--glow-green);
+}
+
+.status-icon.warning {
+    color: var(--accent-yellow);
+    text-shadow: var(--glow-yellow);
+    animation: dot-pulse 2s ease-in-out infinite;
+}
+
+.status-icon.critical {
+    color: var(--accent-red);
+    text-shadow: var(--glow-red);
+    animation: dot-pulse 1s ease-in-out infinite;
+}
+
+/* ===== LOGIN / STATUS BADGES ===== */
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.badge-green { background: var(--accent-green-dim); color: var(--accent-green); }
+.badge-red { background: var(--accent-red-dim); color: var(--accent-red); }
+.badge-yellow { background: var(--accent-yellow-dim); color: var(--accent-yellow); }
+.badge-blue { background: var(--accent-blue-dim); color: var(--accent-blue); }
+.badge-purple { background: var(--accent-purple-dim); color: var(--accent-purple); }

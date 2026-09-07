@@ -1,0 +1,256 @@
+/* ============================================
+   CYBER WAR ROOM - Animations & Effects
+   ============================================ */
+
+/* Shield breathing */
+@keyframes shield-pulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.05);
+        filter: brightness(1.3);
+    }
+}
+
+/* Status dot pulse */
+@keyframes dot-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* Status blink */
+@keyframes status-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Fade in for new elements */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Readiness ring rotation */
+@keyframes readiness-spin {
+    0% {
+        border-top-color: var(--border);
+    }
+    50% {
+        border-top-color: var(--accent-green);
+    }
+    100% {
+        border-top-color: var(--border);
+    }
+}
+
+/* Alert badge pulse */
+.alerts-active .alert-icon,
+.alerts-active .alert-count {
+    animation: alert-pulse 1s ease-in-out infinite;
+}
+
+@keyframes alert-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Pulsing red alert indicator */
+@keyframes red-pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 51, 102, 0.8);
+    }
+}
+
+/* Critical panel glow */
+.panel.critical-glow {
+    border-color: var(--accent-red);
+    animation: critical-border-pulse 2s ease-in-out infinite;
+}
+
+@keyframes critical-border-pulse {
+    0%, 100% {
+        border-color: var(--accent-red);
+        box-shadow: 0 0 5px rgba(255, 51, 102, 0.2);
+    }
+    50% {
+        border-color: #ff5588;
+        box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+    }
+}
+
+/* Data value transition */
+@keyframes value-flash {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: var(--glow-green), 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.value-updated {
+    animation: value-flash 0.5s ease;
+}
+
+/* Radar/scan sweep */
+@keyframes scan-sweep {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Threat feed entry */
+@keyframes slide-in {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.feed-item-new {
+    animation: slide-in 0.4s ease;
+}
+
+/* Glowing text animation for threat level changes */
+@keyframes threat-level-flash {
+    0% {
+        transform: scale(1);
+        color: var(--accent-yellow);
+    }
+    50% {
+        transform: scale(1.2);
+        color: var(--accent-red);
+        text-shadow: var(--glow-red);
+    }
+    100% {
+        transform: scale(1);
+        color: var(--accent-yellow);
+    }
+}
+
+.threat-level-changed {
+    animation: threat-level-flash 1s ease;
+}
+
+/* Blinking cursor for terminal feel */
+@keyframes cursor-blink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Scanline sweep effect */
+.scan-sweep-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 170, 255, 0.05),
+        transparent
+    );
+    animation: scanline-move 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanline-move {
+    from {
+        left: -50%;
+    }
+    to {
+        left: 100%;
+    }
+}
+
+/* Tick count change animation */
+.tick-up {
+    animation: tick-glow 0.3s ease;
+}
+
+@keyframes tick-glow {
+    0% {
+        text-shadow: 0 0 5px rgba(0, 255, 136, 0);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+    }
+    100% {
+        text-shadow: var(--glow-green);
+    }
+}
+
+/* Flash for network metrics */
+.network-flash {
+    animation: network-flash-anim 0.6s ease;
+}
+
+@keyframes network-flash-anim {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Alert banner for critical incidents */
+@keyframes alert-banner {
+    0% {
+        background: transparent;
+    }
+    50% {
+        background: var(--accent-red-dim);
+    }
+    100% {
+        background: transparent;
+    }
+}
+
+.critical-incident {
+    animation: alert-banner 2s ease-in-out infinite;
+}

@@ -1,0 +1,164 @@
+/* ============================================
+   CYBER WAR ROOM - Main Styles
+   Dark military theme with glowing elements
+   ============================================ */
+
+:root {
+    /* Color Palette */
+    --bg-primary: #0a0e17;
+    --bg-secondary: #0f1623;
+    --bg-card: #141d2b;
+    --bg-panel-header: #1a2436;
+    --border: #2a3a4a;
+    --border-bright: #3a5060;
+    
+    /* Text colors */
+    --text-primary: #e0e6ed;
+    --text-secondary: #8892a0;
+    --text-muted: #5a6b7a;
+    --text-bright: #ffffff;
+    
+    /* Accent colors */
+    --accent-green: #00ff88;
+    --accent-green-dim: rgba(0, 255, 136, 0.15);
+    --accent-red: #ff3366;
+    --accent-red-dim: rgba(255, 51, 102, 0.15);
+    --accent-yellow: #ffcc00;
+    --accent-yellow-dim: rgba(255, 204, 0, 0.15);
+    --accent-orange: #ff8800;
+    --accent-orange-dim: rgba(255, 136, 0, 0.15);
+    --accent-blue: #00aaff;
+    --accent-blue-dim: rgba(0, 170, 255, 0.15);
+    --accent-purple: #aa66ff;
+    --accent-purple-dim: rgba(170, 102, 255, 0.15);
+    --accent-cyan: #00ffdd;
+    
+    /* Glow effects */
+    --glow-green: 0 0 10px rgba(0, 255, 136, 0.4);
+    --glow-red: 0 0 10px rgba(255, 51, 102, 0.5);
+    --glow-yellow: 0 0 10px rgba(255, 204, 0, 0.4);
+    --glow-blue: 0 0 10px rgba(0, 170, 255, 0.4);
+    --glow-purple: 0 0 10px rgba(170, 102, 255, 0.4);
+    
+    /* Typography */
+    --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Border radius */
+    --radius-sm: 3px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    position: relative;
+    min-height: 100vh;
+    letter-spacing: 0.5px;
+}
+
+/* Background grid effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(0, 170, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 170, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Scanline effect overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+}
+
+/* Vignette effect */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-bright);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* Selection */
+::selection {
+    background: var(--accent-blue-dim);
+    color: var(--text-bright);
+}
+
+/* Common text classes */
+.green { color: var(--accent-green); text-shadow: var(--glow-green); }
+.red { color: var(--accent-red); text-shadow: var(--glow-red); }
+.yellow { color: var(--accent-yellow); text-shadow: var(--glow-yellow); }
+.orange { color: var(--accent-orange); text-shadow: var(--glow-orange); }
+.blue { color: var(--accent-blue); text-shadow: var(--glow-blue); }
+.purple { color: var(--accent-purple); text-shadow: var(--glow-purple); }
+.muted { color: var(--text-muted); }
+.bright { color: var(--text-bright); }

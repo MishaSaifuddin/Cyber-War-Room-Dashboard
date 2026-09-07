@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER WAR ROOM | Security Operations Dashboard</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo">
+                <span class="logo-shield">&#9670;</span>
+                <h1>CYBER WAR ROOM</h1>
+                <span class="logo-sub">SECURITY OPERATIONS CENTER</span>
+            </div>
+        </div>
+
+        <div class="topbar-center">
+            <div class="defcon-indicator" id="defconIndicator">
+                <span class="defcon-label">THREAT LEVEL</span>
+                <span class="defcon-value" id="threatLevelValue">DEFCON 3</span>
+            </div>
+        </div>
+
+        <div class="topbar-right">
+            <div class="clock-container">
+                <span class="clock-label">UTC</span>
+                <span class="clock-time" id="utcClock">00:00:00</span>
+            </div>
+            <div class="alert-badge" id="alertBadge">
+                <span class="alert-icon">&#9888;</span>
+                <span class="alert-count" id="alertCount">0</span>
+                <span class="alert-label">ALERTS</span>
+            </div>
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-dot"></span>
+                <span id="connectionLabel">MOCK</span>
+            </div>
+            <div class="mode-toggle">
+                <button id="modeButton" class="mode-btn mock-mode">MOCK</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN DASHBOARD ===== -->
+    <main class="dashboard">
+
+        <!-- ROW 1: Network | Security | Suspicious Activities -->
+        <section class="row">
+            <!-- Network Health -->
+            <div class="panel network-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128268;</span>
+                    <h2>NETWORK HEALTH</h2>
+                    <span class="panel-status" id="netStatus">OPERATIONAL</span>
+                </div>
+                <div class="panel-body">
+                    <div class="stat-grid-2">
+                        <div class="stat">
+                            <span class="stat-label">UPTIME</span>
+                            <span class="stat-value" id="uptime">99.97%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">LATENCY</span>
+                            <span class="stat-value" id="latency">24ms</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">IN-TRAFFIC</span>
+                            <span class="stat-value" id="inTraffic">1.24 Gbps</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">OUT-TRAFFIC</span>
+                            <span class="stat-value" id="outTraffic">0.86 Gbps</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">CONNECTIONS</span>
+                            <span class="stat-value" id="connections">23,456</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">PACKET LOSS</span>
+                            <span class="stat-value" id="packetLoss">0.02%</span>
+                        </div>
+                    </div>
+                    <div class="traffic-bars">
+                        <div class="bar-row">
+                            <span class="bar-label">IN</span>
+                            <div class="traffic-bar-container">
+                                <div class="traffic-bar bar-in" id="barIn" style="width: 62%"></div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">OUT</span>
+                            <div class="traffic-bar-container">
+                                <div class="traffic-bar bar-out" id="barOut" style="width: 43%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="network-sparkline">
+                        <canvas id="netSparkline" width="280" height="50"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Health -->
+            <div class="panel security-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128737;</span>
+                    <h2>SECURITY HEALTH</h2>
+                    <span class="panel-status green" id="secStatus">SECURED</span>
+                </div>
+                <div class="panel-body">
+                    <div class="security-score-container">
+                        <canvas id="securityGauge" width="160" height="90"></canvas>
+                        <span class="score-value" id="securityScore">86</span>
+                    </div>
+                    <div class="vuln-list">
+                        <div class="vuln-row">
+                            <span class="vuln-dot critical"></span>
+                            <span>Critical</span>
+                            <span class="vuln-count" id="vulnCritical">2</span>
+                        </div>
+                        <div class="vuln-row">
+                            <span class="vuln-dot high"></span>
+                            <span>High</span>
+                            <span class="vuln-count" id="vulnHigh">7</span>
+                        </div>
+                        <div class="vuln-row">
+                            <span class="vuln-dot medium"></span>
+                            <span>Medium</span>
+                            <span class="vuln-count" id="vulnMedium">14</span>
+                        </div>
+                        <div class="vuln-row">
+                            <span class="vuln-dot low"></span>
+                            <span>Low</span>
+                            <span class="vuln-count" id="vulnLow">32</span>
+                        </div>
+                    </div>
+                    <div class="patch-status">
+                        <div class="patch-header">
+                            <span>PATCH COMPLIANCE</span>
+                            <span id="patchCompliance">87%</span>
+                        </div>
+                        <div class="patch-bar-container">
+                            <div class="patch-bar" id="patchBar" style="width: 87%"></div>
+                        </div>
+                    </div>
+                    <div class="last-scan">
+                        <span>LAST SCAN</span>
+                        <span id="lastScan">2 min ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suspicious Activities -->
+            <div class="panel suspicious-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128680;</span>
+                    <h2>SUSPICIOUS ACTIVITIES</h2>
+                    <span class="panel-status red" id="susStatus">THREATS DETECTED</span>
+                </div>
+                <div class="panel-body">
+                    <div class="threat-feed" id="threatFeed">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <div class="activity-breakdown">
+                        <canvas id="activityChart" width="240" height="110"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROW 2: System Status | Incidents | Critical Assets -->
+        <section class="row">
+            <!-- System Status -->
+            <div class="panel system-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128421;</span>
+                    <h2>SYSTEM STATUS</h2>
+                    <span class="panel-status" id="sysStatus">ALL SYSTEMS GO</span>
+                </div>
+                <div class="panel-body">
+                    <div class="server-grid" id="serverGrid">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incidents -->
+            <div class="panel incidents-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128305;</span>
+                    <h2>INCIDENTS</h2>
+                    <span class="panel-status red" id="incidentCount">3 ACTIVE</span>
+                </div>
+                <div class="panel-body">
+                    <div class="incident-stats">
+                        <div class="stat-single">
+                            <span class="stat-label">CRITICAL</span>
+                            <span class="stat-value red" id="incCritical">1</span>
+                        </div>
+                        <div class="stat-single">
+                            <span class="stat-label">HIGH</span>
+                            <span class="stat-value orange" id="incHigh">1</span>
+                        </div>
+                        <div class="stat-single">
+                            <span class="stat-label">MEDIUM</span>
+                            <span class="stat-value yellow" id="incMedium">1</span>
+                        </div>
+                        <div class="stat-single">
+                            <span class="stat-label">RESPONSE TIME</span>
+                            <span class="stat-value" id="avgResponse">4m 32s</span>
+                        </div>
+                    </div>
+                    <div class="incident-list" id="incidentList">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Critical Assets -->
+            <div class="panel assets-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128230;</span>
+                    <h2>CRITICAL ASSETS</h2>
+                    <span class="panel-status green">PROTECTED</span>
+                </div>
+                <div class="panel-body">
+                    <div class="asset-list" id="assetList">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROW 3: User Activities | Threat Levels | Operational Readiness -->
+        <section class="row">
+            <!-- User Activities -->
+            <div class="panel users-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#128100;</span>
+                    <h2>USER ACTIVITIES</h2>
+                    <span class="panel-status green" id="userStatus">NORMAL</span>
+                </div>
+                <div class="panel-body">
+                    <div class="user-stats">
+                        <div class="stat-single">
+                            <span class="stat-label">ACTIVE SESSIONS</span>
+                            <span class="stat-value" id="activeSessions">247</span>
+                        </div>
+                        <div class="stat-single">
+                            <span class="stat-label">FAILED LOGINS</span>
+                            <span class="stat-value yellow" id="failedLogins">12</span>
+                        </div>
+                        <div class="stat-single">
+                            <span class="stat-label">PRIVILEGED USERS</span>
+                            <span class="stat-value" id="privUsers">18</span>
+                        </div>
+                    </div>
+                    <div class="user-log" id="userLog">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threat Levels -->
+            <div class="panel threats-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#9762;</span>
+                    <h2>THREAT LEVELS</h2>
+                    <span class="panel-status yellow" id="threatStatus">ELEVATED</span>
+                </div>
+                <div class="panel-body">
+                    <div class="threat-gauge-container">
+                        <canvas id="threatGauge" width="180" height="100"></canvas>
+                        <span class="threat-gauge-value" id="threatGaugeValue">62</span>
+                    </div>
+                    <div class="threat-categories" id="threatCategories">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <div class="threat-trend">
+                        <canvas id="threatTrend" width="280" height="60"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operational Readiness -->
+            <div class="panel readiness-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">&#9889;</span>
+                    <h2>OPERATIONAL READINESS</h2>
+                    <span class="panel-status green" id="readyStatus">READY</span>
+                </div>
+                <div class="panel-body">
+                    <div class="readiness-score">
+                        <div class="readiness-ring">
+                            <span id="readinessValue">92</span>
+                        </div>
+                        <span class="readiness-label">READINESS %</span>
+                    </div>
+                    <div class="team-status" id="teamStatus">
+                        <h3>TEAM ON DUTY</h3>
+                        <div class="team-members">
+                            <div class="member">
+                                <span class="member-dot green"></span>
+                                <span class="member-name">J. Carter</span>
+                                <span class="member-role">SOC LEAD</span>
+                            </div>
+                            <div class="member">
+                                <span class="member-dot green"></span>
+                                <span class="member-name">M. Ross</span>
+                                <span class="member-role">T3 ANALYST</span>
+                            </div>
+                            <div class="member">
+                                <span class="member-dot yellow"></span>
+                                <span class="member-name">A. Patel</span>
+                                <span class="member-role">T2 ANALYST</span>
+                            </div>
+                            <div class="member">
+                                <span class="member-dot green"></span>
+                                <span class="member-name">S. Wong</span>
+                                <span class="member-role">IR SPECIALIST</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="capability-status">
+                        <div class="cap-row">
+                            <span>INCIDENT RESPONSE</span>
+                            <div class="cap-bar"><div class="cap-fill" style="width: 95%"></div></div>
+                        </div>
+                        <div class="cap-row">
+                            <span>THREAT INTELLIGENCE</span>
+                            <div class="cap-bar"><div class="cap-fill" style="width: 88%"></div></div>
+                        </div>
+                        <div class="cap-row">
+                            <span>FORENSICS</span>
+                            <div class="cap-bar"><div class="cap-fill" style="width: 82%"></div></div>
+                        </div>
+                        <div class="cap-row">
+                            <span>VULNERABILITY MGMT</span>
+                            <div class="cap-bar"><div class="cap-fill" style="width: 90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>CYBER WAR ROOM v1.0 &copy; 2026</span>
+        <span id="lastUpdate">LAST UPDATE: --:--:--</span>
+        <span>MODE: <span id="footerMode">MOCK</span></span>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/charts.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data/mockData.js"></script>
+    <script src="js/utils/wsClient.js"></script>
+    <script src="js/data/apiService.js"></script>
+    <script src="js/data/dataManager.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/components/networkHealth.js"></script>
+    <script src="js/components/securityHealth.js"></script>
+    <script src="js/components/suspiciousActivity.js"></script>
+    <script src="js/components/systemStatus.js"></script>
+    <script src="js/components/incidents.js"></script>
+    <script src="js/components/criticalAssets.js"></script>
+    <script src="js/components/userActivities.js"></script>
+    <script src="js/components/threatLevels.js"></script>
+    <script src="js/components/operationalReadiness.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
