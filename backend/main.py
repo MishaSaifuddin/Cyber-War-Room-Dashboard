@@ -6,10 +6,10 @@ import os
 import sys
 import threading
 
-# Add backend to path
+# Add backend to path (safe whether from source or PyInstaller bundle)
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from backend.config import HTTP_HOST, HTTP_PORT, STATIC_DIR, WS_PORT
+from backend.config import HTTP_HOST, HTTP_PORT, STATIC_DIR, WS_PORT, APP_ROOT
 from backend.detection.engine import engine
 from backend.server.http_server import HTTPServer
 from backend.server.ws_server import WebSocketServer

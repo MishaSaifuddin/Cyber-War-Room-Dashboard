@@ -26,7 +26,41 @@ Generates realistic simulated attacks and metrics for demos/training. No backend
 
 ---
 
-## ⚡ Quick Start (Live Detection)
+## 💻 Desktop App (Offline, no install needed)
+
+Prefer a double-click tool? Build the standalone exe — it bundles Python, all
+dependencies, the dashboard, and the icon into one portable file. No Python or
+internet needed to run it.
+
+### Quick build (one time, needs Python)
+```
+pip install pyinstaller pystray
+pyinstaller war_room.spec --noconfirm
+```
+The exe lands in `dist/CyberWarRoom.exe`. Double-click it (or pin to taskbar /
+send a shortcut to your desktop for a nice icon).
+
+### What it does when you click it
+- Starts the detection engine + HTTP + WebSocket servers (all offline/local)
+- Opens the dashboard automatically in your browser
+- Shows a system tray icon: **Open Dashboard** / **Quit**
+- Logs activity to `war_room.log` next to the exe
+- No console window; runs silently in the background until you Quit
+
+### Build from source (instead of the spec)
+```
+pyinstaller --onefile --windowed --icon assets/war_room.ico \
+    --add-data "index.html;." --add-data "css;css" --add-data "js;js" \
+    --add-data "assets/war_room.ico;assets" --add-data "assets/war_room.png;assets" \
+    backend/desktop_launcher.py --name CyberWarRoom
+```
+
+The icon generator (`icon_generator.py`) recreates `assets/war_room.ico` if you
+want to customize the look.
+
+---
+
+## ⚡ Quick Start (From Source / Live Detection)
 
 ### 1. Install dependencies (one time)
 ```

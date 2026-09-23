@@ -2,6 +2,17 @@
 Cyber War Room - Backend Configuration
 """
 import os
+import sys
+
+
+def _app_root():
+    """Resolve the app root whether running from source or a PyInstaller bundle."""
+    if getattr(sys, "frozen", False):
+        return getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(sys.executable)))
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+APP_ROOT = _app_root()
 
 # WebSocket server
 WS_HOST = "127.0.0.1"
@@ -10,7 +21,7 @@ WS_PORT = 8765
 # HTTP static server (serves the dashboard)
 HTTP_HOST = "127.0.0.1"
 HTTP_PORT = 8080
-STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+STATIC_DIR = APP_ROOT
 
 # Telemetry collection intervals (seconds)
 COLLECTION_INTERVALS = {
