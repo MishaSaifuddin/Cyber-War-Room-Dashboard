@@ -1,8 +1,7 @@
 # 🛡️ CYBER WAR ROOM - Security Operations Dashboard
 
 <p align="center">
-  <img src="screenshots/CWR.png" alt="Cyber War Room Dashboard" width="950"><img width="112" height="110" alt="CWR" src="https://github.com/user-attachments/assets/7bd554fc-d7d0-43b1-843d-9874150cc90b" />
-
+  <img width="112" height="110" alt="CWR" src="https://github.com/user-attachments/assets/7bd554fc-d7d0-43b1-843d-9874150cc90b" />
 </p>
 
 A centralized cybersecurity War Room dashboard that monitors **your actual computer** in real-time, detecting security threats like suspicious processes, attacks, file changes, and system anomalies - alongside a comprehensive monitoring interface.
